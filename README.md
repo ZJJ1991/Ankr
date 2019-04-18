@@ -5,12 +5,16 @@
 * Install Golang
 * Place this project into your {gopath}/src/github.com/
 
+    `git clone https://github.com/ZJJ1991/Ankr.git`
+
 ## datastructure Module
 This module contains the basic data structures.
 
 
 ## firstTest Module
 This module contains the implementations regarding the 1st test. To see the result, run the following command:
+
+`cd firstTest`
 
 `go run chessboard.go`
 
@@ -20,6 +24,8 @@ The result is as follows:
 
 ## secondTest Module
 This module contains the implementations regarding the 2nd test. To see the result, run the following command:
+
+`cd secondTest`
 
 `go run playChess.go`
 
