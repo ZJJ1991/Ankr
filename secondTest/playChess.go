@@ -3,6 +3,7 @@ package main
 import(
 	"fmt"
 	"math/rand"
+	"time"
 	ds "github.com/Ankr/datastructure"
 )
 
@@ -51,6 +52,7 @@ func player2Term(cb ds.Chessboard) ds.Chessboard {
 
 func play(cb ds.Chessboard, piece int) ds.Chessboard{
 	// randomly choose one column
+	rand.Seed(time.Now().UnixNano())
 	index := rand.Intn(7)
 	// form bottom to top
 	for i := 5; i >= 0; i-- {
