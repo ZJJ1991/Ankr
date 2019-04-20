@@ -12,7 +12,7 @@ import
 // Piece struct
 // Since we already have ds.Square struct, we don't really need this one.
 // I define this struct here because, I wanna link the struct with other functions, which is a noval feature of golang. 
-// I verbosely do this just for showing examiner I know this feature.
+// I verbosely do this just for showing the examiner I know this feature.
 type Piece struct{
 	Black bool
 	White bool
