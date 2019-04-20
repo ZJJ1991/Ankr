@@ -40,17 +40,21 @@ This module contains the implementations regardigng the 3rd test. To see the res
 
 `go run checkWin.go`
 
-However, there are 4 situations that a player can win:
+However, there are 4 situations where a player can win:
 
 * situation1
+
 ![images](images/situation1.png)
 
 * situation2
+
 ![images](images/situation2.png)
 
 * situation3
+
 ![images](images/situation3.png)
 
 * situation 4
+
 ![images](images/situation4.png)
 
