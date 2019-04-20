@@ -36,7 +36,7 @@ The result is as follows:
 ## thirdTest Module
 This module contains the implementations regardigng the 3rd test. To see the result, run the following command:
 
-`cd secondTest`
+`cd thirdTest`
 
 `go run checkWin.go`
 
