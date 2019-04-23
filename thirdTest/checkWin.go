@@ -4,8 +4,6 @@ import
 (
 	"fmt"
 	ds "github.com/Ankr/datastructure"
-	"math/rand"
-	"time"
 )
 
 
@@ -32,7 +30,7 @@ func main(){
 // check if there exists one [i, j] that
 // cb[i+1, j+1], cb[i+2, j+2], cb[i+3, j+3] combined with cb[i, j]
 // are the same color
-func (p *Piece) checkSituation1 (cb ds.Chessboard) bool {
+func (p *Piece) checkSituation1 (cb *ds.Chessboard) bool {
 	color := 0;
 	if p.White == true {
 		color = square.White
@@ -56,7 +54,7 @@ func (p *Piece) checkSituation1 (cb ds.Chessboard) bool {
 // check if there exists one [i, j] that
 // cb[i-1, j+1], cb[i-2, j+2], cb[i-3, j+3] combined with cb[i, j]
 // are the same color
-func (p *Piece) checkSituation2 (cb ds.Chessboard) bool {
+func (p *Piece) checkSituation2 (cb *ds.Chessboard) bool {
 	color := 0;
 	if p.White == true {
 		color = square.White
@@ -78,7 +76,7 @@ func (p *Piece) checkSituation2 (cb ds.Chessboard) bool {
 // check if there exists one [i, j] that
 // cb[i, j+1], cb[i, j+2], cb[i, j+3] combined with cb[i, j]
 // are the same color
-func (p *Piece) checkSituation3 (cb ds.Chessboard) bool {
+func (p *Piece) checkSituation3 (cb *ds.Chessboard) bool {
 	color := 0;
 	if p.White == true {
 		color = square.White
@@ -100,7 +98,7 @@ func (p *Piece) checkSituation3 (cb ds.Chessboard) bool {
 // check if there exists one [i, j] that
 // cb[i+1, j], cb[i+2, j], cb[i+3, j] combined with cb[i, j]
 // are the same color
-func (p *Piece) checkSituation4 (cb ds.Chessboard) bool {
+func (p *Piece) checkSituation4 (cb *ds.Chessboard) bool {
 	color := 0;
 	if p.White {
 		color = square.White
@@ -125,33 +123,26 @@ func playChess(){
 		false,
 		false,
 	}
-	cb := ds.Chessboard{
-		{square.Empty, square.Empty, square.Empty, square.Empty, square.Empty, square.Empty, square.Empty},
-		{square.Empty, square.Empty, square.Empty, square.Empty, square.Empty, square.Empty, square.Empty},
-		{square.Empty, square.Empty, square.Empty, square.Empty, square.Empty, square.Empty, square.Empty},
-		{square.Empty, square.Empty, square.Empty, square.Empty, square.Empty, square.Empty, square.Empty},
-		{square.Empty, square.Empty, square.Empty, square.Empty, square.Empty, square.Empty, square.Empty},
-		{square.Empty, square.Empty, square.Empty, square.Empty, square.Empty, square.Empty, square.Empty},
-   }
-   for hasEmpty(cb) {
-		cb = player1Term(cb)
+	cb := &ds.Chessboard{}
+   for cb.HasEmpty() {
+		cb.Player1Term()
 		p = Piece {
 			true, 
 			false,
 		}
 		if (p.checkSituation1(cb) || p.checkSituation2(cb) || p.checkSituation3(cb) || p.checkSituation4(cb)) {
-			printChessboard(cb)
+			cb.PrintChessboard()
 			// fmt.Println("Player 1 Wins!")
 			return 
 		}
-		if(hasEmpty(cb)){
-			cb = player2Term(cb)
+		if(cb.HasEmpty()){
+			cb.Player2Term()
 			p = Piece {
 				false, 
 				true,
 			}
 			if (p.checkSituation1(cb) || p.checkSituation2(cb) || p.checkSituation3(cb) || p.checkSituation4(cb)){
-				printChessboard(cb)
+				cb.PrintChessboard()
 				// fmt.Println()
 				// fmt.Println("Player 2 Wins!")
 				return 
@@ -161,72 +152,19 @@ func playChess(){
    // When the chessboard is fullfilled, check again who wins
    p = Piece{true, false,}
    if (p.checkSituation1(cb) || p.checkSituation2(cb) || p.checkSituation3(cb) || p.checkSituation4(cb)) {
-		printChessboard(cb)
+		cb.PrintChessboard()
 		// fmt.Println("Player 1 Wins!")
-		return 
+		return
 	}
 	p = Piece{false, true,}
    if (p.checkSituation1(cb) || p.checkSituation2(cb) || p.checkSituation3(cb) || p.checkSituation4(cb)) {
-		printChessboard(cb)
+		cb.PrintChessboard()
 		// fmt.Println("Player 2 Wins!")
 		return 
 	}
-	// No one wins 
-    printChessboard(cb)
+	// No one wins
+    cb.PrintChessboard()
 	fmt.Println()
 	fmt.Printf("No one Wins!")
    return 
-}
-
-func player1Term(cb ds.Chessboard) ds.Chessboard {
-	refereshedChessboard := play(cb, square.Black)
-	return refereshedChessboard
-}
-
-func player2Term(cb ds.Chessboard) ds.Chessboard {
-	refereshedChessboard := play(cb, square.White)
-	return refereshedChessboard
-}
-
-func play(cb ds.Chessboard, piece int) ds.Chessboard{
-	// randomly choose one column
-	rand.Seed(time.Now().UnixNano())
-	index := rand.Intn(7)
-	// fmt.Print(index)
-	// form bottom to top
-	for i := 5; i >= 0; i-- {
-		if ( cb[i][index] == 0 ){
-			cb[i][index] = piece
-			return cb
-		}
-	}
-	return cb
-}
-
-func hasEmpty(cb ds.Chessboard) bool{
-	// from top to bottom
-	for _, rowContent := range cb {
-		for _, component := range rowContent {
-			if ( component == 0 ){
-				return true
-			}
-		}
-	}
-	return false
-}
-
-func printChessboard(cb ds.Chessboard){
-	for _, rowcontent := range cb	{
-		for _, rowcomponent  := range rowcontent {
-			switch rowcomponent{
-			case 0:
-				fmt.Printf("%v\t", ".")	
-			case 1:
-				fmt.Printf("%v\t", "x")
-			case 2:
-				fmt.Printf("%v\t", "o")
-			}
-		}
-		fmt.Println()
-	}
 }
