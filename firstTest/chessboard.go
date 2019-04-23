@@ -1,5 +1,5 @@
 package main
-import(
+import (
 	"fmt"
 	ds "github.com/Ankr/datastructure"
 )
