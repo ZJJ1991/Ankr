@@ -20,9 +20,9 @@ func main(){
 func playChess(){
    cb := &ds.Chessboard{}
    for cb.HasEmpty() {
-		cb.Player1Term()
+		cb.Play(square.Black)
 		if(cb.HasEmpty()){
-			cb.Player2Term()			
+			cb.Play(square.White)			
 		}
    }
    cb.PrintChessboard()
