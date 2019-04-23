@@ -20,20 +20,11 @@ func main(){
 func playChess(){
    cb := &ds.Chessboard{}
    for cb.HasEmpty() {
-		cb = player1Term(cb)
+		cb.Player1Term()
 		if(cb.HasEmpty()){
-			cb = player2Term(cb)
+			cb.Player2Term()			
 		}
    }
    cb.PrintChessboard()
 }
 
-func player1Term(cb *ds.Chessboard) *ds.Chessboard {
-	cb.Play(square.Black)
-	return cb
-}
-
-func player2Term(cb *ds.Chessboard) *ds.Chessboard {
-	cb.Play(square.White)
-	return cb
-}

@@ -11,44 +11,15 @@ var square = ds.Square {
 }
 
 func main(){
-	 fmt.Printf("Empty Chessboard \n\n")
-	 emptyChessboard := ds.Chessboard{
-		{square.Empty, square.Empty, square.Empty, square.Empty, square.Empty, square.Empty, square.Empty},
-		{square.Empty, square.Empty, square.Empty, square.Empty, square.Empty, square.Empty, square.Empty},
-		{square.Empty, square.Empty, square.Empty, square.Empty, square.Empty, square.Empty, square.Empty},
-		{square.Empty, square.Empty, square.Empty, square.Empty, square.Empty, square.Empty, square.Empty},
-		{square.Empty, square.Empty, square.Empty, square.Empty, square.Empty, square.Empty, square.Empty},
-		{square.Empty, square.Empty, square.Empty, square.Empty, square.Empty, square.Empty, square.Empty},
-	}
-	printChessboard(emptyChessboard)
+	fmt.Printf("Empty Chessboard \n")
+	// Every chessboard elements will be automatically set 0 value.
+	Chessboard := &ds.Chessboard{}
+	Chessboard.PrintChessboard()
 	fmt.Println()
-	fmt.Printf("Case2 Chessboard \n\n")
-	Case2Chessboard := ds.Chessboard{
-		{square.Empty, square.Empty, square.Empty, square.Black, square.Empty, square.Empty, square.Empty},
-		{square.Empty, square.Empty, square.Empty, square.Empty, square.Empty, square.Empty, square.Empty},
-		{square.Empty, square.Empty, square.Empty, square.White, square.Empty, square.Empty, square.Empty},
-		{square.Empty, square.Empty, square.Black, square.Empty, square.Empty, square.White, square.Empty},
-		{square.Empty, square.Empty, square.Empty, square.Empty, square.Empty, square.Empty, square.Empty},
-		{square.Empty, square.Empty, square.Empty, square.Empty, square.Empty, square.Empty, square.Empty},	}
-	printChessboard(Case2Chessboard)
-
+	Chessboard[0][3] = square.Black
+	Chessboard[2][3] = square.White
+	Chessboard[3][2] = square.Black
+	Chessboard[3][5] = square.White
+	fmt.Printf("Case2 Chessboard \n")
+	Chessboard.PrintChessboard()
 }
-
-
-func printChessboard(cb ds.Chessboard){
-	for _, rowcontent := range cb	{
-		for _, rowcomponent  := range rowcontent {
-			switch rowcomponent{
-			case 0:
-				fmt.Printf("%v\t", ".")	
-			case 1:
-				fmt.Printf("%v\t", "x")
-			case 2:
-				fmt.Printf("%v\t", "o")
-			}
-		}
-		fmt.Println()
-	}
-}
-
-
