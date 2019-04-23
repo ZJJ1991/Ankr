@@ -56,8 +56,8 @@ func (cb *Chessboard) HasEmpty() bool{
 	return false
 }
 
-
-func (cb *Chessboard) Play(piece int) *Chessboard {
+// Play plays the game.
+func (cb *Chessboard) Play(piece int) ([2]int) {
 	// randomly choose one column
 	rand.Seed(time.Now().UnixNano())
 	index := rand.Intn(7)
@@ -66,18 +66,9 @@ func (cb *Chessboard) Play(piece int) *Chessboard {
 	for i := 5; i >= 0; i-- {
 		if ( cb[i][index] == 0 ){
 			cb[i][index] = piece
-			return cb
+			return [2]int{i, index}
 		}
 	}
-	return cb
+	return [2]int{-1, -1}
 }
 
-func (cb *Chessboard) Player1Term() *Chessboard {
-	cb.Play(Black)
-	return cb
-}
-
-func (cb *Chessboard) Player2Term() *Chessboard {
-	cb.Play(White)
-	return cb
-}
